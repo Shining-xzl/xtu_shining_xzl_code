@@ -5,7 +5,7 @@ int f[50];
 int q[100003],xlen=0;
 int q1[100003],num[100003],lenc=0;
 
-void xsort(int l,int r)//¿ìËÙÅÅĞò 
+void xsort(int l,int r)//å¿«é€Ÿæ’åº
 {
     int mid=q[(l+r)>>1];
     int a=l,b=r,temp;
@@ -54,7 +54,7 @@ void prime()
     }
 }
 
-int find(int x)//¶ş·Ö²éÕÒ 
+int find(int x)//äºŒåˆ†æŸ¥æ‰¾
 {
     int l=1,r=lenc;
     int mid;
