@@ -1,3 +1,3 @@
 # xtu_shining_xzl_code
-Learning experience
+Learning experience\n
 If you want to download the file of zip,please use IDM
