@@ -1,0 +1,8 @@
+#include <cstdio>
+using namespace std;
+
+int main()
+{
+	printf("BDACD\n");
+	return 0;
+ } 
