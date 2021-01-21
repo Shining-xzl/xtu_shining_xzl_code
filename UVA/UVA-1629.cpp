@@ -6,7 +6,7 @@ int n,m,k;
 int sum[23][23];
 int dp[23][23][23][23];
 
-int num_of_cherry(int x1,int y1,int x2,int y2)//¸ÃĞ¡¾ØÕóÄÚµÄcherryÊıÁ¿ 
+int num_of_cherry(int x1,int y1,int x2,int y2)//è¯¥å°çŸ©é˜µå†…çš„cherryæ•°é‡ 
 {
 	return sum[x2][y2]+sum[x1-1][y1-1]-sum[x1-1][y2]-sum[x2][y1-1];
 }
@@ -14,24 +14,24 @@ int num_of_cherry(int x1,int y1,int x2,int y2)//¸ÃĞ¡¾ØÕóÄÚµÄcherryÊıÁ¿
 int dp_process_core(int x1,int y1,int x2,int y2)
 {
 	int &ans=dp[x1][y1][x2][y2];
-	if(x1>x2||y1>y2) return ans=0;//Ô½½ç·µ»Ø0 
-	if(ans<INF) return ans;//ÓĞ¼ÇÂ¼ Ö±½Ó·µ»Ø 
+	if(x1>x2||y1>y2) return ans=0;//è¶Šç•Œè¿”å›0 
+	if(ans<INF) return ans;//æœ‰è®°å½• ç›´æ¥è¿”å› 
 	if(num_of_cherry(x1,y1,x2,y2)==1) return ans=0;
-	if(num_of_cherry(x1,y1,x2,y2)==0) return INF;//ÎŞĞ§£¬Ö±½Ó·µ»Ø×î´óÖµ 
+	if(num_of_cherry(x1,y1,x2,y2)==0) return INF;//æ— æ•ˆï¼Œç›´æ¥è¿”å›æœ€å¤§å€¼ 
 	int l=y2-y1+1,c=x2-x1+1;
 	int temp;
 	for(int i=x1;i<=x2;i++)
 	{
 		for(int j=y1;j<=y2;j++)
 		{
-			if(i==x2&&j==y2) continue;//ÎŞĞ§ 
-			temp=dp_process_core(x1,y1,i,j);//ËÄ¸ö¾ØÕó 
+			if(i==x2&&j==y2) continue;//æ— æ•ˆ 
+			temp=dp_process_core(x1,y1,i,j);//å››ä¸ªçŸ©é˜µ 
 			temp+=dp_process_core(x1,j+1,i,y2);
 			temp+=dp_process_core(i+1,y1,x2,j);
 			temp+=dp_process_core(i+1,j+1,x2,y2);
-			if(i!=x2) temp+=l;//ºáÏòÇĞÒ»µ¶ 
-			if(j!=y2) temp+=c;//×İÏòÇĞÒ»µ¶ 
-			if(temp<0||temp>=INF) temp=INF;//tempÖµÔ½½ç £¬ÎŞĞ§Öµ 
+			if(i!=x2) temp+=l;//æ¨ªå‘åˆ‡ä¸€åˆ€ 
+			if(j!=y2) temp+=c;//çºµå‘åˆ‡ä¸€åˆ€ 
+			if(temp<0||temp>=INF) temp=INF;//tempå€¼è¶Šç•Œ ï¼Œæ— æ•ˆå€¼ 
 			if(temp<ans) ans=temp; 
 		}
 	}
@@ -51,7 +51,7 @@ int main()
 			scanf("%d%d",&x,&y);
 			sum[x][y]=1; 
 		}
-		for(int i=1;i<=n;i++)//¾ØÕóÇ°×ººÍ£¨0£¬0£©µ½£¨x£¬y£©µÄ¾ØÕóºÍ 
+		for(int i=1;i<=n;i++)//çŸ©é˜µå‰ç¼€å’Œï¼ˆ0ï¼Œ0ï¼‰åˆ°ï¼ˆxï¼Œyï¼‰çš„çŸ©é˜µå’Œ 
 		{
 			for(int j=1;j<=m;j++)
 				sum[i][j]+=sum[i][j-1];
