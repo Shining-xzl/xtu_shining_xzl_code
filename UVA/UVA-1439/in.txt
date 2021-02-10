@@ -1,0 +1,26 @@
+2
+P Q
+R S
+6
+P Q
+Q R
+R S
+S T
+T U
+U P
+4
+P Q
+P Q
+P Q
+P Q
+3
+P Q
+Q R
+R P
+6
+P Q
+Q S
+S R
+R P
+P S
+R Q
