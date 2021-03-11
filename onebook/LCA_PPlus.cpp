@@ -57,8 +57,6 @@ int main()
 	int a,b,ans;
 	a=d1.go_back(1e9);
 	b=d2.go_back(1e9);
-	printf("%d %d %d\n",d1.a,d1.b,d1.c);
-	printf("%d %d %d\n",d2.a,d2.b,d2.c);
 	if(d1==d2)
 	{
 		int l=0,r,mid;
