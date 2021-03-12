@@ -1,7 +1,0 @@
-3
-abc
-abcdabcabb
-abab
-abababababab
-xyz
-abcdefghikjlmn
