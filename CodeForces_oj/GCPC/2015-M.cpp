@@ -24,13 +24,13 @@ int main()
 	memset(dis,INF,sizeof(dis));
 	int n,x,now;
 	scanf("%d",&n);
-	scanf("%d",&x);
-	dis[0]=1;
+	scanf("%d",&x);//x为a[1],默认升序
+	dis[0]=0;//初始化，不要忘记
 	for(int i=1;i<n;++i)
 	{
 		scanf("%d",&now);
 		if(dis[now%x]==INF)
-			dis[now%x]=now/x,v[len++]=now%x;
+			dis[now%x]=now,v[len++]=now%x;//构建同余系，原始数据
 	}
 	priority_queue<valx> q;
 	for(int i=0;i<x;i++)
@@ -38,16 +38,16 @@ int main()
 			q.push(valx(dis[i],i));
 	valx temp(0,0);
 	int val,num,valp,nump;
-	while(!q.empty())
+	while(!q.empty())//跑最短路，利用原始数据构建其他数据
 	{
 		temp=q.top();
 		q.pop();
 		val=temp.val;
 		num=temp.num;
 		if(num>dis[val]) continue;
-		for(int i=0;i<len;i++)
+		for(int i=0;i<len;i++)//这题卡常数，建议保存原始数据
 		{
-			nump=num+dis[v[i]]+(val+v[i])/x;
+			nump=num+dis[v[i]];
 			valp=(val+v[i])%x;
 			if(dis[valp]>nump)
 			{
@@ -62,7 +62,7 @@ int main()
 	while(m--)
 	{
 		scanf("%d",&now);
-		if(now==0||now/x>=dis[now%x]) printf("TAK\n");
+		if(now>=dis[now%x]) printf("TAK\n");//判断已知最小的d与其比较
 		else printf("NIE\n");
 	}
 	return 0;
