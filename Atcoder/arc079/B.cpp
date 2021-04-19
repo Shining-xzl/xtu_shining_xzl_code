@@ -8,6 +8,7 @@ int n = 50;
 
 int main()
 {
+	freopen("in.txt","w",stdout);
 	scanf("%lld", &k);
 	LL a,b;
 	a = k/n;
