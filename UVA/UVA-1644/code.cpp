@@ -20,8 +20,6 @@ void get_prime()
 
 int main()
 {
-//	freopen("in.txt","r",stdin);
-//	freopen("out.txt","w",stdout);
 	get_prime();
 	int n,op;
 	while(scanf("%d", &n) == 1 && n)
