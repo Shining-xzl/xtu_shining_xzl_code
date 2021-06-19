@@ -7,7 +7,7 @@ const int lim = 1e5+3;
 int dis[lim][103];
 int n,m,q;
 vector<int> f[103];
-vector<int> son[103];
+vector<int> son[lim];
 void bfs(int x)
 {
 	queue<int> q;
