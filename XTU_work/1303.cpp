@@ -1,64 +1,38 @@
 #include <cstdio>
-#include <cstring>
-using namespace std;
-const __int64 T=9223372036854775807;
-__int64 ans[63][63],k[65],s[63];
 
-void read(__int64 &a)
+using namespace std;
+typedef long long ll;
+const ll xlim = 9223372036854775807;
+ll dp[70][70];
+ll a[70];
+int n;
+
+#define Min(x,y) ((x)<(y)?(x):(y))
+
+ll solve(int l,int r,int step)
 {
-	char c=getchar();
-	while(c>'9'||c<'0') c=getchar();
-	a=0;
-	while(c<='9'&&c>='0')
-	{
-		a=(a<<3)+(a<<1)+(c^48);
-		c=getchar();
-	}
-	return;
+	if (dp[l][r] < xlim) return dp[l][r];
+	if (l == r)	return dp[l][r] = a[l] * (1ll << step);
+	ll lval,rval;
+	lval = solve(l+1,r,step+1) + a[l] * (1ll << step);
+	rval = solve(l,r-1,step+1) + a[r] * (1ll << step);
+	dp[l][r] = Min(lval,rval);
+	return dp[l][r];
 }
 
 int main()
 {
-	__int64 time,i,n,l,r,tempr,templ,anx;
-	read(time);
-	k[1]=1;
-	for(i=2;i<=63;i++)
-		k[i]=k[i-1]*2;
-	while(time--)
+	int T;
+	scanf("%d", &T);
+	while(T--)
 	{
-		read(n);
-		for(i=1;i<=n;i++)
-			read(s[i]);
-		memset(ans,0,sizeof(ans));
-		for(l=n-2;l>=0;l--)
-		{
-			for(i=1;i+l<=n;i++)
-			{
-				r=i+l;
-				templ=T; 
-				tempr=T;
-				if(i-1>0) 
-				{
-					templ=s[i-1]*k[n-l-1];
-					if(ans[i][r]==0||ans[i][r]>templ+ans[i-1][r])
-					ans[i][r]=templ+ans[i-1][r];
-				}
-				if(r+1<=n) 
-				{
-					tempr=s[r+1]*k[n-l-1];
-					if(ans[i][r]==0||ans[i][r]>tempr+ans[i][r+1])
-					ans[i][r]=tempr+ans[i][r+1];
-				}
-			}
-		}
-		anx=T;
-		for(i=1;i<=n;i++)
-		{
-			ans[i][i]+=k[n]*s[i];
-			if(ans[i][i]<anx)
-				anx=ans[i][i];
-		}
-		printf("%I64d\n",anx);
+		scanf("%d", &n);
+		for (int i = 1; i <= n; ++i)
+			scanf("%lld", &a[i]);
+		for (int i = 0; i < 70; ++i)
+			for (int j = i; j < 70; ++j)
+				dp[i][j] = xlim;
+		printf("%lld\n",solve(1,n,0));
 	}
 	return 0;
 } 

@@ -1,67 +1,48 @@
 #include <cstdio>
 using namespace std;
 
-void read(__int64 &a)
-{
-	char c=getchar();
-	while(c>'9'||c<'0') c=getchar();
-	a=0;
-	while(c<='9'&&c>='0')
-	{
-		a=(a<<3)+(a<<1)+(c^48);
-		c=getchar();
-	}
-	return;
-}
+typedef long long ll;
+const int lim = 1003;
+ll a[lim],b[lim],k;
+int n;
 
-__int64 n,k;
-__int64 a[1003],b[1003];
-
-inline bool right(__int64 si)
+bool check(int x)
 {
-	__int64 i,temp=k;
-	for(i=1;i<=n;i++)
+	ll t = k;
+	for (int i = 0; i < n; ++i)
 	{
-		if(si*a[i]>b[i])
-		{
-			temp-=(si*a[i]-b[i]);
-			if(temp<0) return 0;
-		}
+		if (a[i] * x <= b[i]) continue;
+		else t -= a[i] * x - b[i];
+		if (t < 0) return 0;
 	}
 	return 1;
 }
 
-__int64 work()
-{
-	__int64 l=0,r=2e+9,mid,ans=0;
-	while(l<=r)
-	{
-		mid=l+r>>1;
-		if(right(mid))
-		{
-			ans=mid;
-			l=mid+1;
-		}
-		else r=mid-1;
-	}
-	return ans;
-}
-
 int main()
 {
-	freopen("in.txt","r",stdin);
-	__int64 time,i;
-	read(time);
-	while(time--)
+	int T;
+	ll l,r,mid,ans;
+	scanf("%d", &T);
+	while(T--)
 	{
-		read(n);
-		read(k);
-		for(i=1;i<=n;i++)
-			read(a[i]);
-		for(i=1;i<=n;i++)
-			read(b[i]);
-		i=work();
-		printf("%I64d\n",i);
-	}
+		scanf("%d %lld", &n,&k);
+		for (int i = 0; i < n; ++i)
+			scanf("%lld", &a[i]);
+		for (int i = 0; i < n; ++i)
+			scanf("%lld", &b[i]);
+		l = 0; r = 2e9;
+		ans = 0;
+		while(l <= r)
+		{
+			mid = (l + r) / 2;
+			if (check(mid))
+			{
+				ans = mid;
+				l = mid + 1;
+			}
+			else r= mid - 1;
+		}
+		printf("%lld\n",ans);
+	}	
 	return 0;
 } 

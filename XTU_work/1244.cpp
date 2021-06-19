@@ -1,77 +1,51 @@
 #include <cstdio>
-#include <algorithm>
 using namespace std;
-int s[10003];
-int n,m,sum,mn;
+int a[10003];
+int n,m;
 
-void read(int &a)
+bool check(int x)
 {
-	char c=getchar();
-	while(c>'9'||c<'0') c=getchar();
-	a=0;
-	while(c<='9'&&c>='0')
+	int count = 1, t = 0;
+	for (int i = 0; i < n; ++i)
 	{
-		a=(a<<3)+(a<<1)+(c^48);
-		c=getchar();
-	}
-	return;
-}
-
-bool cmp(const int &a,const int &b)
-{
-	return a>b;
-}
-
-bool right(int si)
-{
-	int sum,con=0,i=1;
-	while(i<=n)
-	{
-		con++;
-		sum=s[i++];
-		while(sum+s[i]<=si&&i<=n) sum+=s[i++];
-	}
-	if(con<=m) return 1;
-	else return 0;
-}
-
-int work()
-{
-	int ans,mid,i,l,r;
-	r=sum;
-	l=mn;
-	while(l<=r)
-	{
-		mid=(l+r)>>1;
-		if(right(mid))
+		if (a[i] > x) return 0;
+		t += a[i];
+		if (t > x)
 		{
-			ans=mid;
-			r=mid-1;
+			++count;
+			t = a[i];
 		}
-		else l=mid+1;
+	}
+	return count <= m;
+}
+
+int solve()
+{
+	int l = 0, r = 1e9;
+	int mid,ans = r;
+	while(l <= r)
+	{
+		mid = (l + r) / 2;
+		if (check(mid))
+		{
+			r = mid - 1;
+			ans = mid;
+		}
+		else l = mid + 1;
 	}
 	return ans;
 }
 
 int main()
 {
-	freopen("in.txt","r",stdin);
-	int time,i;
-	read(time);
-	while(time--)
+	int T;
+	scanf("%d", &T);
+	while(T--)
 	{
-		sum=0;
-		mn=0;
-		read(n);
-		read(m);
-		for(i=1;i<=n;i++)
-		{
-			read(s[i]);
-			if(s[i]>mn) mn=s[i];
-			sum+=s[i];
-		}
-		i=work();
-		printf("%d\n",i);
+		scanf("%d %d", &n,&m);
+		for (int i = 0; i < n; ++i)
+			scanf("%d", &a[i]);
+		printf("%d\n",solve());
 	}
 	return 0;
 } 
